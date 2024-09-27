@@ -16,28 +16,28 @@ int main() {
     }
 
     cin >> u;
-
-    for(int i = 0; i < N; i++){
-        if(i == u) E[i].clear();
-        if(find(E[i].begin(), E[i].end(), u) == E[i].end()) continue;
-        E[i].erase(remove(E[i].begin(), E[i].end(), u), E[i].end());
-    }
     
     int ans = 0;
 
     stack<pair<int, int>> st;
-    st.push({0, -1});
+    st.push({0, 0});
 
     while(!st.empty()){
         auto [cur, par] = st.top();
         st.pop();
 
+        bool leaf = true;
+
+        if(cur == u) continue;
+
         for(auto &nxt: E[cur]){
             if(nxt == par) continue;
+            if(nxt == u) continue;
             st.push({nxt, cur});
+            leaf = false;
         }
 
-        if(E[cur].size() == 1) ans++;
+        if(leaf) ans++;
     }
 
     cout << ans << "\n";
