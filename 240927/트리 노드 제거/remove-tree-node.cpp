@@ -6,21 +6,26 @@ int main() {
     cin >> N;
 
     vector<vector<int>> E(505);
-    int u;
-    cin >> u;
 
-    for(int i = 1; i < N; i++){
+    int root = 0;
+    int u;
+
+    for(int i = 0; i < N; i++){
         cin >> u;
+        if(u == -1){
+            root = i;
+            continue;
+        }
         E[u].push_back(i);
-        E[i].push_back(u);
     }
 
-    cin >> u;
+    int remove;
+    cin >> remove;
     
     int ans = 0;
 
     stack<pair<int, int>> st;
-    st.push({0, 0});
+    st.push({root, root});
 
     while(!st.empty()){
         auto [cur, par] = st.top();
@@ -28,11 +33,10 @@ int main() {
 
         bool leaf = true;
 
-        if(cur == u) continue;
+        if(cur == remove) continue;
 
         for(auto &nxt: E[cur]){
-            if(nxt == par) continue;
-            if(nxt == u) continue;
+            if(nxt == remove) continue;
             st.push({nxt, cur});
             leaf = false;
         }
