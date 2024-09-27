@@ -5,7 +5,7 @@ int main() {
     int N;
     cin >> N;
 
-    vector<vector<int>> E(N+1);
+    vector<vector<int>> E(505);
     int u;
     cin >> u;
 
