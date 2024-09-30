@@ -1,27 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+typedef long long ll;
+
 int main() {
     
-    int N, M;
+    ll N, M;
     cin >> N >> M;
 
-    vector<vector<pair<int, int>>> E(N+1);
+    vector<vector<pair<ll, ll>>> E(N+1);
 
     for(int i = 1; i < N; i++){
-        int u, v, w;
+        ll u, v, w;
         cin >> u >> v >> w;
 
         E[u].push_back({v, w});
         E[v].push_back({u, w});
     }
 
-    vector<int> dist(N+1, -1);
-    vector<int> par(N+1, -1);
+    vector<ll> dist(N+1, -1);
+    vector<ll> par(N+1, -1);
     dist[1] = 0;
     par[1] = 1;
 
-    function<void(int)> dfs = [&](int cur){
+    function<void(ll)> dfs = [&](ll cur){
         for(auto [nxt, weight] : E[cur]){
             if(dist[nxt] >= 0) continue;
             dist[nxt] = dist[cur] + weight;
@@ -32,7 +34,7 @@ int main() {
 
     dfs(1);
 
-    function<int(int, int)> lca = [&](int u, int v){
+    function<int(ll, ll)> lca = [&](ll u, ll v){
         if(dist[u] < dist[v]) swap(u, v);
         while(dist[u] != dist[v]){
             u = par[u];
@@ -48,7 +50,7 @@ int main() {
     };
 
     for(int i = 0; i < M; i++){
-        int u, v;
+        ll u, v;
         cin >> u >> v;
         cout << dist[u] + dist[v] - 2*dist[lca(u, v)] << "\n";
     }
