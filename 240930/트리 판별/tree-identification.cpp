@@ -31,6 +31,11 @@ int main() {
             }
         }
     }
+
+    if(root == -1){
+        cout << "0\n";
+        return 0;
+    }
     
     vector<int> visited(10101, false);
 
