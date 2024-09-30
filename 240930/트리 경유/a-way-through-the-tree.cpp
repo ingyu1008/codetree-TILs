@@ -13,8 +13,8 @@ int main() {
         cin >> dest;
 
         int x = 1;
-        while(x*2 <= dest) x <<= 1;
-        x >>= 1;
+        while(x <= dest) x <<= 1;
+        x >>= 2;
 
         if(dest & x){
             cur = cur * 2 + 1;
@@ -36,3 +36,8 @@ int main() {
     }
     return 0;
 }
+/*
+1
+10 11
+100 101 110 111
+*/
