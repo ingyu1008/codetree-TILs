@@ -13,26 +13,29 @@ int main() {
         cin >> dest;
 
         int x = 1;
-        while(x < dest) x <<= 1;
-        x >>= 1;
+        while(x <= dest) x <<= 1;
+        x >>= 2;
 
-        if(dest & x){
-            cur = cur * 2 + 1;
-            if(color[cur]){
-                cout << cur << "\n";
-                continue;
+        while(x > 0){
+            if(dest & x){
+                cur = cur * 2 + 1;
+                if(color[cur]){
+                    cout << cur << "\n";
+                    goto nxt;
+                }
+            } else {
+                cur = cur * 2;
+                if(color[cur]){
+                    cout << cur << "\n";
+                    goto nxt;
+                }
             }
-            color[cur] = true;
-        } else {
-            cur = cur * 2;
-            if(color[cur]){
-                cout << cur << "\n";
-                continue;
-            }
-            color[cur] = true;
+            x >>= 1;
         }
-
+        color[dest] = 1;
         cout << 0 << "\n";
+        nxt:
+        int a = 1;
     }
     return 0;
 }
