@@ -13,7 +13,7 @@ int main() {
         cin >> dest;
 
         int x = 1;
-        while(x <= dest) x <<= 1;
+        while(x < dest) x <<= 1;
         x >>= 2;
 
         if(dest & x){
@@ -39,5 +39,5 @@ int main() {
 /*
 1
 10 11
-100 101 110 111
+100 101 110
 */
