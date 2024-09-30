@@ -19,14 +19,17 @@ int main() {
     }
 
     vector<ll> dist(N+1, -1);
+    vector<ll> depth(N+1, -1);
     vector<ll> par(N+1, -1);
     dist[1] = 0;
+    depth[1] = 0;
     par[1] = 1;
 
     function<void(ll)> dfs = [&](ll cur){
         for(auto [nxt, weight] : E[cur]){
             if(dist[nxt] >= 0) continue;
             dist[nxt] = dist[cur] + weight;
+            depth[nxt] = depth[cur] + 1;
             par[nxt] = cur;
             dfs(nxt);
         }
@@ -35,10 +38,10 @@ int main() {
     dfs(1);
 
     function<int(ll, ll)> lca = [&](ll u, ll v){
-        if(dist[u] < dist[v]) swap(u, v);
-        while(dist[u] != dist[v]){
+        if(depth[u] < depth[v]) swap(u, v);
+        while(depth[u] != depth[v]){
             u = par[u];
-            if(dist[u] < dist[v]) swap(u, v);
+            if(depth[u] < depth[v]) swap(u, v);
         }
         
         while(u != v){
