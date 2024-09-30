@@ -19,7 +19,9 @@ int main() {
     vector<int> dist(N+1, -1);
     vector<int> par(N+1, -1);
     dist[1] = 0;
-    par[1] = 1;
+    par[1] = 0;
+    par[0] = 0;
+    dist[0] = 0;
 
     function<void(int)> dfs = [&](int cur){
         for(auto [nxt, weight] : E[cur]){
