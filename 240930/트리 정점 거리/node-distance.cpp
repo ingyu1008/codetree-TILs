@@ -19,9 +19,7 @@ int main() {
     vector<int> dist(N+1, -1);
     vector<int> par(N+1, -1);
     dist[1] = 0;
-    par[1] = 0;
-    par[0] = 0;
-    dist[0] = 0;
+    par[1] = 1;
 
     function<void(int)> dfs = [&](int cur){
         for(auto [nxt, weight] : E[cur]){
@@ -35,9 +33,10 @@ int main() {
     dfs(1);
 
     function<int(int, int)> lca = [&](int u, int v){
+        if(dist[u] < dist[v]) swap(u, v);
         while(dist[u] != dist[v]){
-            if(dist[u] > dist[v]) u = par[u];
-            else if(dist[u] < dist[v]) v= par[v];
+            u = par[u];
+            if(dist[u] < dist[v]) swap(u, v);
         }
         
         while(u != v){
