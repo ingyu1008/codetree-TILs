@@ -29,7 +29,7 @@ int main() {
     }
 
     int ans = 0;
-    for(int i = 0; i < N; i++){
+    for(int i = 1; i < N; i++){
         int pa = par[A[i]];
         int pb = par[K];
         if(pa != pb && par[pa] == par[pb]){
