@@ -1,15 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+typedef long long ll;
+
 int main() {
-    int N;
+    ll N;
     cin >> N;
 
-    vector<vector<pair<int, int>>> E(N+1);
-    vector<array<int, 3>> edges;
+    vector<vector<pair<ll, ll>>> E(N+1);
+    vector<array<ll, 3>> edges;
 
     for(int i = 1; i < N; i++){
-        int u, v, w;
+        ll u, v, w;
         cin >> u >> v >> w;
         E[u].push_back({v, w});
         E[v].push_back({u, w});
@@ -17,8 +19,8 @@ int main() {
     }
 
     auto getDiameter = [&](int u, int v, int start, int end){
-        array<int, 4> ret;
-        vector<int> dist(N, -1);
+        array<ll, 4> ret;
+        vector<ll> dist(N, -1);
 
         function<void(int)> dfs = [&](int cur){
             for(auto &[nxt, cost] : E[cur]){
@@ -56,7 +58,7 @@ int main() {
 
     auto diameter = getDiameter(-1, -1, 0, 0);
 
-    int ans = 0;
+    ll ans = 0;
 
     for(auto &[u, v, w]: edges){
         auto d1 = getDiameter(u, v, diameter[0], diameter[1]);
