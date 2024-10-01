@@ -16,8 +16,8 @@ int main() {
         edges.push_back({u, v, w});
     }
 
-    auto getDiameter = [&](int u, int v, int start){
-        array<int, 3> ret;
+    auto getDiameter = [&](int u, int v, int start, int end){
+        array<int, 4> ret;
         vector<int> dist(N, -1);
         dist[start] = 0;
 
@@ -47,19 +47,21 @@ int main() {
 
         ret[1] = start;
         ret[2] = dist[start];
+        ret[3] = false;
+        if(dist[end] >= 0) ret[3] = true;
 
         return ret;
     };
 
-    auto diameter = getDiameter(-1, -1, 0);
+    auto diameter = getDiameter(-1, -1, 0, 0);
 
     int ans = 0;
 
     for(auto &[u, v, w]: edges){
-        auto d1 = getDiameter(u, v, diameter[0]);
-        auto d2 = getDiameter(u, v, diameter[1]);
+        auto d1 = getDiameter(u, v, diameter[0], diameter[1]);
+        auto d2 = getDiameter(u, v, diameter[1], diameter[0]);
         
-        if(max(d1[2], d2[2]) == diameter[2]){
+        if(d1[3]){
             ans = max(ans, diameter[2] + w);
         } else {
             ans = max(ans, d1[2] + d2[2] + w);
