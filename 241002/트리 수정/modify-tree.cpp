@@ -60,12 +60,10 @@ int main() {
     for(auto &[u, v, w]: edges){
         auto d1 = getDiameter(u, v, diameter[0], diameter[1]);
         auto d2 = getDiameter(u, v, diameter[1], diameter[0]);
+
+        if(d1[3] || d2[3]) continue;
         
-        if(d1[3] && d2[3]){
-            ans = max(ans, diameter[2] + w);
-        } else {
-            ans = max(ans, d1[2] + d2[2] + w);
-        }
+        ans = max(ans, d1[2] + d2[2] + w);
     }
 
     cout << ans << "\n";
