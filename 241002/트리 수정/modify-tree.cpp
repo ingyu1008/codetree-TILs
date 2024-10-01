@@ -18,8 +18,8 @@ int main() {
         edges.push_back({u, v, w});
     }
 
-    auto getDiameter = [&](int u, int v, int start, int end){
-        array<ll, 4> ret;
+    auto getDiameter = [&](int u, int v, int start){
+        array<ll, 3> ret;
         vector<ll> dist(N, -1);
 
         function<void(int)> dfs = [&](int cur){
@@ -50,22 +50,19 @@ int main() {
         }
         ret[1] = mxidx;
         ret[2] = dist[mxidx];
-        ret[3] = false;
-        if(dist[end] >= 0) ret[3] = true;
 
         return ret;
     };
 
-    auto diameter = getDiameter(-1, -1, 0, 0);
+    auto diameter = getDiameter(-1, -1, 0);
 
     ll ans = 0;
 
     for(auto &[u, v, w]: edges){
-        auto d1 = getDiameter(u, v, diameter[0], diameter[1]);
-        auto d2 = getDiameter(u, v, diameter[1], diameter[0]);
+        auto d1 = getDiameter(u, v, u);
+        auto d2 = getDiameter(u, v, v);
 
-        if(d1[3] && d2[3]) ans = max(ans, max(d1[2], d2[2]) + w);
-        else ans = max(ans, d1[2] + d2[2] + w);
+        ans = max(ans, d1[2] + d2[2] + w);
     }
 
     cout << ans << "\n";
