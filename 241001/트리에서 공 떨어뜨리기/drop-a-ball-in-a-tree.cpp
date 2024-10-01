@@ -14,12 +14,13 @@ int main() {
     int cur = 1;
     long long K;
     cin >> K;
+    K--;
 
     while(true){
         if(E[cur].first < 0 && E[cur].second < 0) break;
         if(E[cur].first >= 0 && E[cur].second >= 0){
-            if(K&1) cur = E[cur].first;
-            else cur = E[cur].second;
+            if(K&1) cur = E[cur].second;
+            else cur = E[cur].first;
             K >>= 1;
             continue;
         }
