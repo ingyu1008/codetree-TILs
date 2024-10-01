@@ -19,10 +19,9 @@ int main() {
     auto getDiameter = [&](int u, int v, int start, int end){
         array<int, 4> ret;
         vector<int> dist(N, -1);
-        dist[start] = 0;
 
         function<void(int)> dfs = [&](int cur){
-            for(auto [nxt, cost]: E[cur]){
+            for(auto &[nxt, cost] : E[cur]){
                 if(cur == u && nxt == v) continue;
                 if(cur == v && nxt == u) continue;
                 if(dist[nxt] >= 0) continue;
@@ -31,22 +30,24 @@ int main() {
             }
         };
 
+        dist[start] = 0;
         dfs(start);
+
+        int mxidx = 0;
         for(int i = 0; i < N; i++){
-            if(dist[start] <= dist[i]) start = i;
+            if(dist[mxidx] <= dist[i]) mxidx = i;
         }
+        ret[0] = mxidx;
 
         fill(dist.begin(), dist.end(), -1);
-        dist[start] = 0;
-        ret[0] = start;
+        dist[mxidx] = 0;
+        dfs(mxidx);
 
-        dfs(start);
         for(int i = 0; i < N; i++){
-            if(dist[start] <= dist[i]) start = i;
+            if(dist[mxidx] <= dist[i]) mxidx = i;
         }
-
-        ret[1] = start;
-        ret[2] = dist[start];
+        ret[1] = mxidx;
+        ret[2] = dist[mxidx];
         ret[3] = false;
         if(dist[end] >= 0) ret[3] = true;
 
