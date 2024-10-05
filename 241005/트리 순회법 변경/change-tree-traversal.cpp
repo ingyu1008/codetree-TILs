@@ -23,9 +23,11 @@ int main() {
             E[cur].second  = i;
             par[i] = cur;
             cur = i;
-        } else if(A[i] > A[par[cur]] ){
-            cur = par[cur];
-            i--;
+        } else{
+            while(cur != 0 && A[i] > A[par[cur]]) cur = par[cur];
+            E[cur].second  = i;
+            par[i] = cur;
+            cur = i;
         }
     }
     function<void(int)> dfs = [&](int cur){
