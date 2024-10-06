@@ -30,12 +30,10 @@ int main() {
             sz[cur] += sz[nxt];
         }
 
-        if(children > 1) middle = cur;
+        if(children > 1 || children == 0) middle = cur;
     };
 
     dfs(R, 0);
-
-    // cout << middle << "\n";
 
     int mx = -1e9;
     int mn = 1e9;
@@ -46,6 +44,8 @@ int main() {
         mn = min(mn, sz[nxt]);
     }
 
+    if(mx == -1e9) mx = 0;
+    if(mn ==  1e9) mn = 0;
 
     cout << mx - mn << "\n";
 
