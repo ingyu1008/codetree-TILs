@@ -35,6 +35,19 @@ int main() {
 
     dfs(R, 0);
 
+    function<void(int, int)> dfs2 = [&](int cur, int par){
+        sz[cur] = 1;
+
+        for(auto &nxt: E[cur]){
+            if(nxt == par) continue;
+            dfs(nxt, cur);
+            sz[cur] += sz[nxt];
+        }
+    };
+
+
+    dfs2(middle, 0);
+
     int mx = -1e9;
     int mn = 1e9;
 
