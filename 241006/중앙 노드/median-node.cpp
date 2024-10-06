@@ -39,7 +39,7 @@ int main() {
     int mn = -1;
 
     for(auto &nxt: E[middle]){
-        if(sz[nxt] > sz[middle]) continue;
+        if(sz[nxt] > sz[middle]) sz[nxt] -= sz[middle];
         if(mx == -1){
             mx = mn = sz[nxt];
         }else {
