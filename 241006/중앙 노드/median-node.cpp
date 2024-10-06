@@ -35,11 +35,22 @@ int main() {
 
     dfs(R, 0);
 
+    function<void(int, int)> dfs2 = [&](int cur, int par){
+        sz[cur] = 1;
+
+        for(auto &nxt: E[cur]){
+            if(nxt == par) continue;
+            dfs(nxt, cur);
+            sz[cur] += sz[nxt];
+        }
+    };
+
+    dfs2(middle, 0);
+
     int mx = -1;
     int mn = -1;
 
     for(auto &nxt: E[middle]){
-        if(sz[nxt] > sz[middle]) sz[nxt] -= sz[middle];
         if(mx == -1){
             mx = mn = sz[nxt];
         }else {
@@ -47,9 +58,6 @@ int main() {
             mn = min(mn, sz[nxt]);
         }
     }
-
-    if(mx == -1e9) mx = 0;
-    if(mn ==  1e9) mn = 0;
 
     cout << mx - mn << "\n";
 
