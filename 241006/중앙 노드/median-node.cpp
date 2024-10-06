@@ -40,7 +40,7 @@ int main() {
 
         for(auto &nxt: E[cur]){
             if(nxt == par) continue;
-            dfs(nxt, cur);
+            dfs2(nxt, cur);
             sz[cur] += sz[nxt];
         }
     };
