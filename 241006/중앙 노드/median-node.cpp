@@ -26,10 +26,11 @@ int main() {
         for(auto &nxt: E[cur]){
             if(nxt == par) continue;
             children++;
-            if(children > 1 && middle == par) middle = cur;
             dfs(nxt, cur);
             sz[cur] += sz[nxt];
         }
+
+        if(children > 1) middle = cur;
     };
 
     dfs(R, 0);
