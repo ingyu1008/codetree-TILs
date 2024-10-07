@@ -26,17 +26,17 @@ int main() {
 
     int ans = 0;
 
-    function<void(int, int)> dfs2 = [&](int cur, int par){
+    function<bool(int, int)> dfs2 = [&](int cur, int par){
         if(depth[cur] <= D){
-            ans--;
-            return;
+            return false;
         }
         for(auto &nxt: E[cur]){
             if(nxt == par) continue;
-            dfs2(nxt, cur);
-            ans++;
+            if(dfs2(nxt, cur)) ans++;
         }
+
         ans++;
+        return true;
     };
 
     dfs(S, 0);
