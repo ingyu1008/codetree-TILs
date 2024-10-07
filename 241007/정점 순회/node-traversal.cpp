@@ -42,7 +42,8 @@ int main() {
     dfs(S, 0);
     dfs2(S, 0);
 
-    cout << ans - 1 <<"\n";
+    if(depth[S] <= D) cout << "0\n";
+    else cout << ans - 1 <<"\n";
 
 
     
