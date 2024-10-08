@@ -26,11 +26,14 @@ int main() {
         for(auto &nxt: E[cur]){
             if(nxt == par) continue;
             indegree[cur]++;
-            parent[cur] = par;
+            parent[nxt] = cur;
             dfs(nxt, cur);
         }
-        if(indegree[cur] == 0) topsort.push(cur);
     };
+
+    dfs(1, 0);
+
+    for(int i = 1; i <= N; i++) if(indegree[i] == 0) topsort.push(i);
 
     int ans = 0;
 
@@ -49,6 +52,9 @@ int main() {
             A[cur] += val;
             A[parent[cur]] -= val;
         } 
+
+        indegree[parent[cur]]--;
+        if(indegree[parent[cur]] == 0) topsort.push(parent[cur]);
     } 
 
     cout << ans << "\n";
