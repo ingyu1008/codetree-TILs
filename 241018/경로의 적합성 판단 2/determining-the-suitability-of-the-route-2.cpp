@@ -34,7 +34,7 @@ struct UF {
 int main() {
     int N, M, K;
 
-    cin >> N >> M;
+    cin >> N >> M >> K;
 
     UF uf(N);
 
