@@ -38,8 +38,6 @@ int main() {
 
     UF uf(N);
 
-    vector<vector<int>> E(N+1);
-
     for(int i = 0; i < M; i++){
         int u, v;
         cin >> u >> v;
@@ -48,11 +46,18 @@ int main() {
 
     int A, B, K;
     cin >> A >> B >> K;
+
+    vector<pair<int ,int>> V;
+    for(int i = 1; i <= N; i++){
+        V.push_back({uf.sz[uf.find(i)], i});
+    }
+
+    sort(V.rbegin(), V.rend());
     
-    for(int i = 1; i <= N && K > 0; i++){
-        if(uf.find(A) == uf.find(i)) continue;
-        if(uf.find(B) == uf.find(i)) continue;
-        uf.unite(A, i);
+    for(int i = 0; i < N && K > 0; i++){
+        if(uf.find(A) == uf.find(V[i].second)) continue;
+        if(uf.find(B) == uf.find(V[i].second)) continue;
+        uf.unite(A, V[i].second);
         K--;
     }
 
