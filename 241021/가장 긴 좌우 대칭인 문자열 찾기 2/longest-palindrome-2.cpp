@@ -8,7 +8,9 @@ int Manachers(string &S){
         T += "#";
         T += S[i];
     }
+    T += "#";
     N = T.size();
+
 
     vector<int> A(N);
     A[0] = 0;
