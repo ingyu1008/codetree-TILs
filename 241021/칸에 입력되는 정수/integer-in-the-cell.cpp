@@ -37,31 +37,23 @@ int main() {
 
     UF uf(N);
 
-    vector<array<int, 2>> A(M);
-    for(int i = 0; i < M; i++){
-        cin >> A[i][0];
-        A[i][1] = i;
-    }
-    sort(A.begin(), A.end());
-
-    vector<bool> valid(N, false);
+    vector<int> left(N+1);
+    iota(left.begin(), left.end(), -1);
 
     int ans = 0;
     for(int i = 0; i < M; i++){
-        if(A[i][0] <= ans) continue;
-        valid[A[i][1]] = true;
+        int k;
+        cin >> k;
+        int u = uf.find(k);
+        int v = left[u];
+        if(v == -1) break;
+
+        left[u] = left[uf.find(v)];
+        uf.unite(u, v);
         ans++;
     }
 
-    ans = 0;
-
-    for(int i = 0; i < M; i++){
-        if(valid[i] == false) break;
-        ans++;
-    }
-
-    cout << ans <<"\n";
-
+    cout << ans << "\n";
 
 
     return 0;
