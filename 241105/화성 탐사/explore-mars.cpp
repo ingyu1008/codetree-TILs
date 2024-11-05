@@ -91,7 +91,7 @@ int main() {
 
     ll ans = 0;
 
-    for(int i = 0;i < E.size(); i++){
+    for(int i = 0;i < N*N; i++){
         for(auto [d, r1, c1, r2, c2] : E){
             if(find(r1, c1) == find(r2, c2)){
                 continue;
