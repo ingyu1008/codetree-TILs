@@ -84,7 +84,7 @@ int main() {
                         continue;
                     }
 
-                    if(dist[r][c] == 1e18){
+                    if(dist[r][c] == 1e9){
                         continue;
                     }
 
