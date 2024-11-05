@@ -59,6 +59,13 @@ int main() {
                 auto [r, c] = q.front();
                 q.pop();
 
+                if(grid[r][c] == 1 || grid[r][c] == 2){
+                    if(r != i || c != j){
+                        E.push_back({dist[r][c], i, j, r, c});
+                        continue;
+                    }
+                }
+
                 for(int d = 0; d < 4; d++){
                     int nr = r + dr[d];
                     int nc = c + dc[d];
@@ -75,20 +82,6 @@ int main() {
                         dist[nr][nc] = dist[r][c] + 1;
                         q.push({nr, nc});
                     }
-                }
-            }
-
-            for(int r = 0; r < N; r++){
-                for(int c = 0; c < N; c++){
-                    if(grid[r][c] != 1 && grid[r][c] != 2){
-                        continue;
-                    }
-
-                    if(dist[r][c] == 1e9){
-                        continue;
-                    }
-
-                    E.push_back({dist[r][c], i, j, r, c});
                 }
             }
         }
