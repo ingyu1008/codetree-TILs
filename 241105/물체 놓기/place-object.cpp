@@ -9,13 +9,14 @@ int main() {
     int N;
     cin >> N;
 
-    vector<int> A(N);
+    vector<array<int, 3>> E;
 
     for(int i = 0; i < N; i++){
-        cin >> A[i];
+        int w;
+        cin >> w;
+        E.push_back({w, i, N});
     }
 
-    vector<array<int, 3>> E;
 
     for(int i = 0; i < N; i++){
         for(int j = 0; j < N; j++){
@@ -30,7 +31,7 @@ int main() {
 
     sort(E.begin(), E.end());
 
-    vector<int> par(N);
+    vector<int> par(N+1);
     iota(par.begin(), par.end(), 0);
 
     function<int(int)> find = [&](int x) {
@@ -52,7 +53,7 @@ int main() {
         ans += w;
     }
 
-    cout << ans + *min_element(A.begin(), A.end()) << '\n';
+    cout << ans  << '\n';
 
 
     return 0;
