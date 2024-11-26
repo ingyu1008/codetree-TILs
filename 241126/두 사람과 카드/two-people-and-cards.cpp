@@ -18,7 +18,7 @@ int main()
     }
 
     vector<vector<ll>> dp(N, vector<ll>(N, 1e18));
-    dp[0][0] = 0;
+    dp[0][0] = 1e18;
     dp[0][1] = 0;
     dp[1][0] = 0;
 
