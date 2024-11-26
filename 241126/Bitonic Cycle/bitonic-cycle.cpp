@@ -26,19 +26,17 @@ int main()
     {
         return (P[a].first - P[b].first) * (P[a].first - P[b].first) + (P[a].second - P[b].second) * (P[a].second - P[b].second);
     };
+    
+    for(int i = 0; i < N; i++){
+        for(int j = 0; j < N; j++){
+            int k = max(i, j) + 1;
 
-    for (int cur = 1; cur < N; cur++)
-    {
-        for (int other = 0; other < cur; other++)
-        {
-            dp[cur][other] = min(dp[cur][other], dp[cur - 1][other] + dist(cur, cur - 1));
-            dp[cur - 1][cur] = min(dp[cur - 1][cur], dp[cur - 1][other] + dist(cur, other));
-        
-            dp[other][cur] = min(dp[other][cur], dp[other][cur - 1] + dist(cur, cur - 1));
-            dp[cur][cur - 1] = min(dp[cur][cur - 1], dp[other][cur - 1] + dist(cur, other));
+            if(k >= N) continue;
+
+            dp[k][j] = min(dp[k][j], dp[i][j] + dist(i, k));
+            dp[i][k] = min(dp[i][k], dp[i][j] + dist(j, k));
         }
     }
-    
     int ans = 1e9;
 
     for (int i = 0; i < N-1; i++)
