@@ -29,7 +29,7 @@ int main()
 
     for (int cur = 1; cur < N; cur++)
     {
-        for (int other = 0; other < cur-1; other++)
+        for (int other = 0; other < cur; other++)
         {
             dp[cur][other] = min(dp[cur][other], dp[cur - 1][other] + dist(cur, cur - 1));
             dp[cur - 1][cur] = min(dp[cur - 1][cur], dp[cur - 1][other] + dist(cur, other));
@@ -43,8 +43,8 @@ int main()
 
     for (int i = 0; i < N; i++)
     {
-        ans = min(ans, dp[N - 1][i]);
-        ans = min(ans, dp[i][N - 1]);
+        ans = min(ans, dp[N - 1][i] + dist(N - 1, i));
+        ans = min(ans, dp[i][N - 1] + dist(N - 1, i));
     }
 
     cout << ans << '\n';
