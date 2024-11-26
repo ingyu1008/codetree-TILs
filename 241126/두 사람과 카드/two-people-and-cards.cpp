@@ -10,29 +10,27 @@ int main()
     int N;
     cin >> N;
 
-    vector<ll> P(N);
+    vector<ll> P(N+1);
 
-    for (int i = 0; i < N; i++)
+    for (int i = 1; i <= N; i++)
     {
         cin >> P[i];
     }
 
-    vector<vector<ll>> dp(N, vector<ll>(N, 1e18));
-    dp[0][0] = 1e18;
-    dp[0][1] = 0;
-    dp[1][0] = 0;
+    vector<vector<ll>> dp(N+1, vector<ll>(N+1, 1e18));
+    dp[0][0] = 0;
 
     auto dist = [&](int a, int b)
     {
+        if(a == 0 || b == 0) return 0LL;
         return abs(P[a] - P[b]);
     };
     
-    for(int i = 0; i < N; i++){
-        for(int j = 0; j < N; j++){
-            if(i == j) continue;
+    for(int i = 0; i <= N; i++){
+        for(int j = 0; j <= N; j++){
             int k = max(i, j) + 1;
 
-            if(k >= N) continue;
+            if(k > N) continue;
 
             dp[k][j] = min(dp[k][j], dp[i][j] + dist(i, k));
             dp[i][k] = min(dp[i][k], dp[i][j] + dist(j, k));
@@ -40,9 +38,9 @@ int main()
     }
     ll ans = 1e18;
 
-    for (int i = 0; i < N-1; i++)
+    for (int i = 0; i < N; i++)
     {
-        ans = min(ans, dp[i][N - 1]);
+        ans = min(ans, dp[i][N]);
     }
 
     cout << ans << '\n';
