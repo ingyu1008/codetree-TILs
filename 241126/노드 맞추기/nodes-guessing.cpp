@@ -67,9 +67,13 @@ int main()
 
     cout << roots.size() << '\n';
 
-    for (int root : roots)
+    for (auto it = roots.begin(); it != roots.end(); it++)
     {
-        cout << inames[root] << ' ';
+        int root = *it;
+        if(it != roots.begin()){
+            cout << ' ';
+        }
+        cout << inames[root];
     }
     cout << '\n';
     
