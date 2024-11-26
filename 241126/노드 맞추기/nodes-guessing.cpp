@@ -74,15 +74,12 @@ int main()
     cout << '\n';
     
     for(auto &[name, idx]: names){
-        sort(children[idx].begin(), children[idx].end());
         cout << name << ' ' << children[idx].size() << ' ';
         for(int child: children[idx]){
             cout << inames[child] << ' ';
         }
         cout << '\n';
     }
-
-    
 
     return 0;
 }
