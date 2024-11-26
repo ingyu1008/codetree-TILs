@@ -50,6 +50,7 @@ int main()
     for (int i = 0; i < N; i++)
     {
         ans = min(ans, dp[i][N]);
+        ans = min(ans, dp[N][i]);
     }
 
     cout << ans << '\n';
