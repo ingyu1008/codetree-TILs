@@ -41,7 +41,6 @@ int main()
 
     for (int i = 0; i < N-1; i++)
     {
-        ans = min(ans, dp[N - 1][i] + dist(N - 1, i));
         ans = min(ans, dp[i][N - 1] + dist(N - 1, i));
     }
 
