@@ -10,53 +10,64 @@ int main()
     int N, M;
     cin >> N >> M;
     
-    vector<vector<int>> E(N+1);
-    vector<int> indegree(N+1, 0);
 
     vector<pair<int, int>> edges;
 
     for (int i = 0; i < M; i++) {
         int a, b;
         cin >> a >> b;
-        E[a].push_back(b);
-        indegree[b]++;
-
         edges.push_back({a, b});
     }
 
-    queue<int> q;
+    int lo = 0, hi = M;
+    int ans = M;
+    while(lo <= hi){
+        int mid = (lo + hi) / 2;
 
-    for (int i = 1; i <= N; i++) {
-        if (indegree[i] == 0) {
-            q.push(i);
+        vector<vector<int>> E(N+1);
+        vector<int> indegree(N+1, 0);
+
+        for(int i = 0; i < mid; i++){
+            int a = edges[i].first;
+            int b = edges[i].second;
+            E[a].push_back(b);
+            indegree[b]++;
         }
-    }
 
-    vector<bool> visited(N+1, false);
-    int ans = 0;
+        int cnt = 0;
 
-    while (!q.empty()) {
-        int u = q.front();
-        q.pop();
-        visited[u] = true;
-        ans++;
-        for (int v : E[u]) {
-            indegree[v]--;
-            if (indegree[v] == 0) {
-                q.push(v);
+        queue<int> q;
+
+        for (int i = 1; i <= N; i++) {
+            if (indegree[i] == 0) {
+                q.push(i);
             }
         }
-    }
 
-    if(ans == N) {
-        cout << "Consistent\n";
+        while(!q.empty()){
+            int u = q.front();
+            q.pop();
+            cnt++;
+            for(int v : E[u]){
+                indegree[v]--;
+                if(indegree[v] == 0){
+                    q.push(v);
+                }
+            }
+        }
+
+        if(cnt == N){
+            ans = mid;
+            lo = mid + 1;
+        } else {
+            hi = mid - 1;
+        }
+    }
+    
+    if(ans == M){
+        cout << "Consistent";
     } else {
-        for(int i = 0; i < M; i++){
-            if(!visited[edges[i].first] || !visited[edges[i].second]){
-                cout <<  i+1 << "\n";
-                return 0;
-            }
-        }
+        cout << ans+1 << '\n';
     }
     
 
