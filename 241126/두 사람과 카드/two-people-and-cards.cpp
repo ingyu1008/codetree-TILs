@@ -28,7 +28,8 @@ int main()
     };
     
     for(int i = 0; i < N; i++){
-        for(int j = 1; j < N; j++){
+        for(int j = 0; j < N; j++){
+            if(i == j) continue;
             int k = max(i, j) + 1;
 
             if(k >= N) continue;
