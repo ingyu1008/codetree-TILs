@@ -78,7 +78,9 @@ int main()
     cout << '\n';
     
     for(auto &[name, idx]: names){
-        sort(children[idx].begin(), children[idx].end());
+        sort(children[idx].begin(), children[idx].end(), [&](int a, int b){
+            return inames[a] < inames[b];
+        });
         cout << name << ' ' << children[idx].size() << ' ';
         for(int child: children[idx]){
             cout << inames[child] << ' ';
