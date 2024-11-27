@@ -65,6 +65,8 @@ int main()
         if(flag){
             mn = min(mn, cnt);
         }
+
+        mat = temp;
     }
 
     if(mn == 1e9){
