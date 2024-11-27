@@ -26,6 +26,7 @@ int main()
     }
 
     vector<vector<int>> E(27);
+    vector<set<int>> adj(27);
     vector<int> indegree(27);
     bool impossible = false;
 
@@ -39,6 +40,7 @@ int main()
         }
 
         if(j == b.size()){
+            if(j == a.size()) continue;
             impossible = true;
             break;
         }
@@ -47,6 +49,9 @@ int main()
             continue;
         }
 
+        if(adj[a[j] - 'a' + 1].find(b[j] - 'a' + 1) != adj[a[j] - 'a' + 1].end()){
+            continue;
+        }
         E[a[j] - 'a' + 1].push_back(b[j] - 'a' + 1);
         indegree[b[j] - 'a' + 1]++;
     }
