@@ -10,14 +10,14 @@ int main()
     int N;
     cin >> N;
 
-    vector<vector<int>> dp(3*N+10, vector<int>((1 << 3)));
+    vector<vector<int>> dp(3*N, vector<int>((1 << 3), -1));
 
     int mod = 10007;
 
     function<int(int, int)> solve = [&](int idx, int mask) -> int {
-        if(dp[idx][mask] != 0) return dp[idx][mask];
         if(idx == 3*N) return mask == 0;
         if(idx > 3*N) return 0;
+        if(dp[idx][mask] != -1) return dp[idx][mask];
 
         if(mask & 1) return dp[idx][mask] = solve(idx + 1, mask >> 1);
 
