@@ -19,11 +19,11 @@ int main()
         cin >> a >> b;
         a--; b--;
 
-        E[a].push_back(b);
-        in[b]++;
+        E[b].push_back(a);
+        in[a]++;
     }
 
-    priority_queue<int, vector<int>, less<int>> pq;
+    priority_queue<int, vector<int>, greater<int>> pq;
 
     for(int i = 0; i < N; i++)
         if(in[i] == 0)
@@ -54,7 +54,7 @@ int main()
     vector<int> ans(N);
 
     for(int i = 0; i < N; i++)
-        ans[order[i]] = i + 1;
+        ans[order[i]] = N - i;
 
     for(int i = 0; i < N; i++)
         cout << ans[i] << " ";
