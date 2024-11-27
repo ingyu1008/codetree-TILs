@@ -10,20 +10,27 @@ int main()
     int N;
     cin >> N;
 
-    vector<int> dp00(N+1), dp01(N+1), dp10(N+1), dp11(N+1);
-
-    dp00[0] = dp01[0] = dp10[0] = dp11[0] = 1;
+    vector<vector<int>> dp(3*N, vector<int>((1 << 3)));
 
     int mod = 10007;
 
-    for(int i = 1; i <= N; i++){
-        dp00[i] = dp11[i-1];
-        dp01[i] = dp10[i-1];
-        dp10[i] = dp01[i-1];
-        dp11[i] = (dp00[i-1] + dp11[i-1]) % mod;
-    }
+    function<int(int, int)> solve = [&](int idx, int mask) -> int {
+        if(idx == 3*N) return mask == 0;
+        if(idx > 3*N) return 0;
+        if(dp[idx][mask] != 0) return dp[idx][mask];
 
-    cout << dp11[N] << '\n';
+        if(mask & 1) return dp[idx][mask] = solve(idx + 1, mask >> 1);
+
+        int ret = solve(idx + 1, (mask >> 1) + (1 << 2));
+
+        if((mask & 2) == 0 && idx % 3 != 2){
+            ret += solve(idx + 2, (mask >> 2));
+        }
+
+        return dp[idx][mask] = ret % mod;
+    };
+
+    cout << solve(0, 0) << '\n';
 
     return 0;
 }
