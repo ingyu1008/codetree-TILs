@@ -17,7 +17,10 @@ int main()
         string op;
         cin >> op;
 
-        if(op == "clear") S = 0;
+        if(op == "clear"){
+            S = 0;
+            continue;
+        }
 
         int x;
         cin >> x;
