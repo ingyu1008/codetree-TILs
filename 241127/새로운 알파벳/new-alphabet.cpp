@@ -73,6 +73,11 @@ int main()
         int u = q.front();
         q.pop();
 
+        if(q.size() > 0){
+            cout << "inf\n";
+            return 0;
+        }
+
         if(u > 0)ans += (char)('a' + u - 1);
 
         for(int v : E[u]){
