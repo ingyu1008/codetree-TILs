@@ -100,14 +100,15 @@ int main()
 
         cur = 0;
         mat = 0;
-        for(int j = S[i].size() - 1; j >= 0; j--){
-            int c = S[i][j] - 'a';
+        for(int j = 0; j < S[i].size(); j++){
+            int c = S[i][S[i].size() - 1 - j] - 'a';
             if(trie[cur].nxt[c] == -1){
                 break;
             }
+
             cur = trie[cur].nxt[c];
-            if(trie[cur].isTerminal && checkPalindrome(S[i], j-1, true)){
-                ans = max(ans,  (int)(S[i].size()) + mat);
+            if(trie[cur].isTerminal && checkPalindrome(S[i], S[i].size() - 1 - j, true)){
+                ans = max(ans, mat + (int)(S[i].size()));
             }
             mat++;
         }
