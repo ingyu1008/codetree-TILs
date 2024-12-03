@@ -10,7 +10,7 @@ struct Node {
     vector<int> nxt;
     int numchild;
     Node(char c = '$', int depth = 0) : c(c), depth(depth), cnt(0), numchild(0) {
-        nxt = vector<int>(26, -1);
+        nxt = vector<int>(27, -1);
     }
 };
 
@@ -40,11 +40,12 @@ int main()
     
     for(int i = 0; i < N; i++){
         cin >> S[i];
+        S[i] += 'z' + 1;
         add(S[i]);
     }
 
     for(int i = 0; i < N; i++){
-        int sz = S[i].size();
+        int sz = S[i].size()-1;
         int cur = 0;
         int ans = 0;
         for(int j = 0; j < sz; j++){
@@ -60,13 +61,3 @@ int main()
 
     return 0;
 }
-
-/*
-5
-dkpwscm gqpmxincm xkmfcnnwlnxfjjj prgoearasyt
-dkpwscm gqpmxincm xkmfcnnwlnxfjjj abfse
-dkpwscm gqpmxincm mjavxzzrqgfgivxsllqjyerw
-dkpwscm gqpmxincm mjavxnwdwlonui
-dkpwscm hsivrcbrbhjxvlf
-
-*/
