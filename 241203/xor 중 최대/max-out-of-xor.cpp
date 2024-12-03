@@ -41,17 +41,17 @@ int main()
 
         int cur = 0;
         ll val = 0;
-        for(int j = 30; j >= 0; j--){
-            int bit = (x >> j) & 1;
-            if(trie[cur].nxt[bit ^ 1] != -1){
-                val += (1LL << j);
-                cur = trie[cur].nxt[bit ^ 1];
-            } else if(trie[cur].nxt[bit] != -1){
-                cur = trie[cur].nxt[bit];
-            } else {
-                break;
-            }
-        }
+        // for(int j = 30; j >= 0; j--){
+        //     int bit = (x >> j) & 1;
+        //     if(trie[cur].nxt[bit ^ 1] != -1){
+        //         val += (1LL << j);
+        //         cur = trie[cur].nxt[bit ^ 1];
+        //     } else if(trie[cur].nxt[bit] != -1){
+        //         cur = trie[cur].nxt[bit];
+        //     } else {
+        //         break;
+        //     }
+        // }
         mx = max(mx, val);
 
     }
