@@ -46,8 +46,10 @@ int main()
             if(trie[cur].nxt[bit ^ 1] != -1){
                 val += (1LL << j);
                 cur = trie[cur].nxt[bit ^ 1];
-            } else {
+            } else if(trie[cur].nxt[bit] != -1){
                 cur = trie[cur].nxt[bit];
+            } else {
+                break;
             }
         }
         mx = max(mx, val);
