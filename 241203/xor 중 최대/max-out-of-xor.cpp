@@ -19,10 +19,10 @@ int main()
 
     vector<Node> trie(1);
 
-    auto add = [&](int x){
+    auto add = [&](ll x){
         int cur = 0;
-        for(int i = 30; i >= 0; i--){
-            int bit = (x >> i) & 1;
+        for(ll i = 40; i >= 0; i--){
+            ll bit = (x >> i) & 1;
             if(trie[cur].nxt[bit] == -1){
                 trie[cur].nxt[bit] = trie.size();
                 trie.emplace_back();
@@ -34,24 +34,24 @@ int main()
     ll mx = 0;
 
     for(int i = 0; i < N; i++){
-        int x;
+        ll x;
         cin >> x;
 
         add(x);
 
         int cur = 0;
         ll val = 0;
-        // for(int j = 30; j >= 0; j--){
-        //     int bit = (x >> j) & 1;
-        //     if(trie[cur].nxt[bit ^ 1] != -1){
-        //         val += (1LL << j);
-        //         cur = trie[cur].nxt[bit ^ 1];
-        //     } else if(trie[cur].nxt[bit] != -1){
-        //         cur = trie[cur].nxt[bit];
-        //     } else {
-        //         break;
-        //     }
-        // }
+        for(ll j = 30; j >= 0; j--){
+            ll bit = (x >> j) & 1;
+            if(trie[cur].nxt[bit ^ 1] != -1){
+                val += (1LL << j);
+                cur = trie[cur].nxt[bit ^ 1];
+            } else if(trie[cur].nxt[bit] != -1){
+                cur = trie[cur].nxt[bit];
+            } else {
+                break;
+            }
+        }
         mx = max(mx, val);
 
     }
