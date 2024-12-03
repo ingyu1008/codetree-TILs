@@ -28,7 +28,7 @@ int main()
     for (int i = 1; i <= N; i++) {
         if (in[i] == 0) {
             q.push(i);
-            dp[i] = 1;
+            dp[i] = (i == 1);
         }
     }
 
