@@ -24,7 +24,7 @@ int main()
         int ret = solve(idx + 1, (mask >> 1) + (1 << 3));
 
         if((mask & 2) == 0 && idx % 4 != 3){
-            ret += solve(idx + 2, (mask >> 3));
+            ret += solve(idx + 2, (mask >> 2));
         }
 
         return dp[idx][mask] = ret % mod;
