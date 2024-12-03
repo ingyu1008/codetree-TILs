@@ -14,8 +14,8 @@ int main()
 {
     cin.tie(0)->sync_with_stdio();
 
-    int N, M;
-    cin >> N >> M;
+    int N;
+    cin >> N;
 
     vector<Node> trie(1);
 
@@ -57,10 +57,8 @@ int main()
 
     int ans = 1;
 
-    for (int i = 0; i < M; i++) {
-        string s;
-        cin >> s;
-        if(find(s)) {
+    for (int i = 0; i < N; i++) {
+        if(find(S[i])) {
             ans = 0;
         }
     }
