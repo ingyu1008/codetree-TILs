@@ -48,7 +48,7 @@ int main()
         int cur = 0;
         int ans = 0;
         for(int j = 0; j < sz; j++){
-            if(trie[cur].numchild > 1){
+            if(trie[cur].numchild > 1 || cur == 0){
                 ans++;
             }
             cur = trie[cur].nxt[S[i][j] - 'a'];
@@ -60,3 +60,13 @@ int main()
 
     return 0;
 }
+
+/*
+5
+dkpwscm gqpmxincm xkmfcnnwlnxfjjj prgoearasyt
+dkpwscm gqpmxincm xkmfcnnwlnxfjjj abfse
+dkpwscm gqpmxincm mjavxzzrqgfgivxsllqjyerw
+dkpwscm gqpmxincm mjavxnwdwlonui
+dkpwscm hsivrcbrbhjxvlf
+
+*/
