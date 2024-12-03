@@ -45,7 +45,9 @@ int main()
 
     T = '$' + T;
 
-    vector<int> dp(T.size(), 0);
+    ll mod = 1e9 + 7;
+
+    vector<ll> dp(T.size(), 0);
     dp[0] = 1;
 
     for(int i = 1; i < T.size(); i++){
@@ -55,7 +57,7 @@ int main()
             if(trie[cur].nxt[c] == -1) break;
             cur = trie[cur].nxt[c];
             if(trie[cur].nxt[26] != -1){
-                dp[j] += dp[i-1];
+                dp[j] = (dp[j] + dp[i-1]) % mod;
             }
         }
     }
