@@ -4,9 +4,9 @@ using namespace std;
 typedef long long ll;
 
 struct Node {
-    vector<int> nxt;
+    int nxt[2];
     Node() {
-        nxt = vector<int>(2, -1);
+        nxt[0] = nxt[1] = -1;
     }
 };
 
