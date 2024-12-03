@@ -21,7 +21,7 @@ int main()
 
     auto add = [&](ll x){
         int cur = 0;
-        for(ll i = 40; i >= 0; i--){
+        for(int i = 30; i >= 0; i--){
             ll bit = (x >> i) & 1;
             if(trie[cur].nxt[bit] == -1){
                 trie[cur].nxt[bit] = trie.size();
@@ -41,10 +41,10 @@ int main()
 
         int cur = 0;
         ll val = 0;
-        for(ll j = 30; j >= 0; j--){
+        for(int j = 30; j >= 0; j--){
             ll bit = (x >> j) & 1;
             if(trie[cur].nxt[bit ^ 1] != -1){
-                val += (1LL << j);
+                val += (1 << j);
                 cur = trie[cur].nxt[bit ^ 1];
             } else if(trie[cur].nxt[bit] != -1){
                 cur = trie[cur].nxt[bit];
