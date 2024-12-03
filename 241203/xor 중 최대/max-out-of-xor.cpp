@@ -1,0 +1,61 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+
+struct Node {
+    vector<int> nxt;
+    Node() {
+        nxt = vector<int>(2, -1);
+    }
+};
+
+int main()
+{
+    cin.tie(0)->sync_with_stdio();
+    
+    int N;
+    cin >> N;
+
+    vector<Node> trie(1);
+
+    auto add = [&](int x){
+        int cur = 0;
+        for(int i = 30; i >= 0; i--){
+            int bit = (x >> i) & 1;
+            if(trie[cur].nxt[bit] == -1){
+                trie[cur].nxt[bit] = trie.size();
+                trie.emplace_back();
+            }
+            cur = trie[cur].nxt[bit];
+        }
+    };
+
+    ll mx = 0;
+
+    for(int i = 0; i < N; i++){
+        int x;
+        cin >> x;
+
+        if(i > 0){
+            int cur = 0;
+            ll val = 0;
+            for(int i = 30; i >= 0; i--){
+                int bit = (x >> i) & 1;
+                if(trie[cur].nxt[bit ^ 1] != -1){
+                    val += (1LL << i);
+                    cur = trie[cur].nxt[bit ^ 1];
+                } else {
+                    cur = trie[cur].nxt[bit];
+                }
+            }
+            mx = max(mx, val);
+        }
+
+        add(x);
+    }
+
+    cout << mx << '\n';
+
+    return 0;
+}
