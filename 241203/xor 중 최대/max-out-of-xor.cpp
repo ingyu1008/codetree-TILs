@@ -40,10 +40,10 @@ int main()
         if(i > 0){
             int cur = 0;
             ll val = 0;
-            for(int i = 30; i >= 0; i--){
-                int bit = (x >> i) & 1;
+            for(int j = 30; j >= 0; j--){
+                int bit = (x >> j) & 1;
                 if(trie[cur].nxt[bit ^ 1] != -1){
-                    val += (1LL << i);
+                    val += (1LL << j);
                     cur = trie[cur].nxt[bit ^ 1];
                 } else {
                     cur = trie[cur].nxt[bit];
