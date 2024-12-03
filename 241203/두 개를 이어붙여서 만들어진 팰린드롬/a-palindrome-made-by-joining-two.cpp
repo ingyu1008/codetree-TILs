@@ -84,7 +84,7 @@ int main()
         for(int j = 0; j < S[i].size(); j++){
             int c = S[i][j] - 'a';
             if(revTrie[cur].isTerminal && checkPalindrome(S[i], j)){
-                ans = max(ans, j-1 + (int)(S[i].size()));
+                ans = max(ans, j + (int)(S[i].size()));
             }
             if(revTrie[cur].nxt[c] == -1){
                 break;
