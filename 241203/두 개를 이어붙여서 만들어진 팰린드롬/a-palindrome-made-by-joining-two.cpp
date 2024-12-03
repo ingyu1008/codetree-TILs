@@ -6,12 +6,15 @@ typedef long long ll;
 struct Node {
     int nxt[26];
     bool isTerminal;
-    Node() {
+    int idx;
+    Node(int idx = -1) {
         for(int i = 0; i < 26; i++){
             nxt[i] = -1;
         }
         isTerminal = false;
+        this->idx = idx;
     }
+
 };
 
 int main()
@@ -24,13 +27,13 @@ int main()
     vector<Node> trie(1);
     vector<Node> revTrie(1);
 
-    auto add = [&](string &s){
+    auto add = [&](string &s, int idx){
         int cur = 0;
         for(int i = 0; i < s.size(); i++){
             int c = s[i] - 'a';
             if(trie[cur].nxt[c] == -1){
                 trie[cur].nxt[c] = trie.size();
-                trie.emplace_back();
+                trie.emplace_back(idx);
             }
             cur = trie[cur].nxt[c];
         }
@@ -42,7 +45,7 @@ int main()
             int c = s[i] - 'a';
             if(revTrie[revcur].nxt[c] == -1){
                 revTrie[revcur].nxt[c] = revTrie.size();
-                revTrie.emplace_back();
+                revTrie.emplace_back(idx);
             }
             revcur = revTrie[revcur].nxt[c];
         }
@@ -54,7 +57,7 @@ int main()
 
     for(int i = 0; i < N; i++){
         cin >> S[i];
-        add(S[i]);
+        add(S[i], i );
     }
 
     auto checkPalindrome = [](string &s, int idx, bool rev = false) -> bool {
@@ -81,22 +84,25 @@ int main()
 
     for(int i = 0; i < N; i++){
         int cur = 0;
+        int mat = 0;
+        
         for(int j = 0; j < S[i].size(); j++){
             int c = S[i][j] - 'a';
-            if(revTrie[cur].isTerminal && checkPalindrome(S[i], j)){
-                ans = max(ans, j + (int)(S[i].size()));
+            if(revTrie[cur].isTerminal && revTrie[cur].idx != i && checkPalindrome(S[i], j)){
+                ans = max(ans, mat + (int)(S[i].size()));
             }
             if(revTrie[cur].nxt[c] == -1){
                 break;
             }
+            mat++;
             cur = revTrie[cur].nxt[c];
         }
 
         cur = 0;
-        int mat = 0;
+        mat = 0;
         for(int j = S[i].size() - 1; j >= 0; j--){
             int c = S[i][j] - 'a';
-            if(trie[cur].isTerminal && checkPalindrome(S[i], j, true)){
+            if(trie[cur].isTerminal && trie[cur].idx != i && checkPalindrome(S[i], j, true)){
                 ans = max(ans,  (int)(S[i].size()) + mat);
             }
             if(trie[cur].nxt[c] == -1){
