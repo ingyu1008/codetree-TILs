@@ -6,6 +6,7 @@ typedef long long ll;
 struct Node {
     int nxt[26];
     bool isTerminal;
+    string word;
     Node() {
         for(int i = 0; i < 26; i++){
             nxt[i] = -1;
@@ -36,6 +37,7 @@ int main()
         }
 
         trie[cur].isTerminal = true;
+        trie[cur].word = s;
 
         int revcur = 0;
         for(int i = s.size() -1; i >= 0; i--){
@@ -48,6 +50,7 @@ int main()
         }
 
         revTrie[revcur].isTerminal = true;
+        revTrie[revcur].word = s;
     };
 
     vector<string> S(N);
@@ -66,8 +69,6 @@ int main()
             l = 0;
             r = idx;
         }
-
-        if( l == r ) return false;
         
         while(l < r){
             if(s[l] != s[r]){
@@ -92,10 +93,10 @@ int main()
                 break;
             }
             cur = revTrie[cur].nxt[c];
-            if(revTrie[cur].isTerminal && checkPalindrome(S[i], j+1)){
+            mat++;
+            if(revTrie[cur].isTerminal && checkPalindrome(S[i], j+1) && S[i] != revTrie[cur].word){
                 ans = max(ans, mat + (int)(S[i].size()));
             }
-            mat++;
         }
 
         cur = 0;
@@ -107,10 +108,10 @@ int main()
             }
 
             cur = trie[cur].nxt[c];
-            if(trie[cur].isTerminal && checkPalindrome(S[i], S[i].size() - 1 - j, true)){
+            mat++;
+            if(trie[cur].isTerminal && checkPalindrome(S[i], S[i].size() - 1 - j, true) && S[i] != trie[cur].word){
                 ans = max(ans, mat + (int)(S[i].size()));
             }
-            mat++;
         }
         
     }
