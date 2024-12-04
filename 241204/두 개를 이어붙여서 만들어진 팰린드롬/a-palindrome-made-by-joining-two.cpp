@@ -131,7 +131,7 @@ int main()
             h.second = ((h.second - pn2*suffixHash[i][j].second)%mod[1] + mod[1])%mod[1];
 
             if(hashSet.find(h) != hashSet.end()){
-                ans = max(ans, sz + (j));
+                ans = max(ans, sz + (j-1));
             }
         }
     }
