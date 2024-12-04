@@ -31,9 +31,6 @@ int main()
         cin >> S[i];
     }
 
-    vector<vector<pair<ll, ll>>> prefixHash(N);
-    vector<vector<pair<ll, ll>>> suffixHash(N);
-
     vector<ll> p = {31, 37};
     vector<ll> mod = {1000000007, 1000000009};
 
@@ -42,17 +39,12 @@ int main()
     for (int i = 0; i < N; i++)
     {
         int sz = S[i].size();
-        prefixHash[i].resize(sz);
-        suffixHash[i].resize(sz);
 
         ll h1 = S[i][0] - 'a' + 1;
         ll h2 = S[i][0] - 'a' + 1;
 
         ll sh1 = S[i][sz - 1] - 'a' + 1;
         ll sh2 = S[i][sz - 1] - 'a' + 1;
-
-        prefixHash[i][0] = {h1, h2};
-        suffixHash[i][sz - 1] = {sh1, sh2};
 
         for (int j = 1; j < sz; j++)
         {
@@ -61,16 +53,10 @@ int main()
             
             sh1 = (sh1 * p[0] + S[i][sz - j - 1] - 'a' + 1) % mod[0];
             sh2 = (sh2 * p[1] + S[i][sz- j - 1] - 'a' + 1) % mod[1];
-
-            prefixHash[i][j] = {h1, h2};
-            suffixHash[i][sz - j - 1] = {sh1, sh2};
         }
 
-        hashSet.insert(prefixHash[i][sz - 1]);
-        revHashSet.insert(suffixHash[i][0]);
-
-        // cout << "i: " << i << ", forward hash: " << prefixHash[i][sz-1].first << " " << prefixHash[i][sz-1].second << endl;
-        // cout << "i: " << i << ", reverse hash: " << suffixHash[i][0].first << " " << suffixHash[i][0].second << endl;
+        hashSet.insert({h1, h2});
+        revHashSet.insert({sh1, sh2});
     }
     
     int ans = 0;
@@ -95,13 +81,12 @@ int main()
 
             if(!isPal) continue;
 
-            pair<ll, ll> h = prefixHash[i][N-1];
-            ll pn = pow(p[0], (sz-1) - j, mod[0]);
-            ll pn2 = pow(p[1], (sz-1) - j, mod[1]);
-            h.first = ((h.first - pn*prefixHash[i][j].first)%mod[0] + mod[0])%mod[0];
-            h.second = ((h.second - pn2*prefixHash[i][j].second)%mod[1] + mod[1])%mod[1];
-
-            // cout << "i: " << i << ", j: "<< j << ", h: " << h.first << " " << h.second << endl;
+            pair<ll, ll> h = {0, 0};
+            
+            for(int k = j+1; k < sz; k++){
+                h.first = (h.first * p[0] + S[i][k] - 'a' + 1) % mod[0];
+                h.second = (h.second * p[1] + S[i][k] - 'a' + 1) % mod[1];
+            }
 
             if(revHashSet.find(h) != revHashSet.end()){
                 ans = max(ans, sz + (sz - j - 1));
@@ -123,12 +108,13 @@ int main()
             }
 
             if(!isPal) continue;
+            
+            pair<ll, ll> h = {0, 0};
 
-            pair<ll, ll> h = suffixHash[i][0];
-            ll pn = pow(p[0], j, mod[0]);
-            ll pn2 = pow(p[1], j, mod[1]);
-            h.first = ((h.first - pn*suffixHash[i][j].first)%mod[0] + mod[0])%mod[0];
-            h.second = ((h.second - pn2*suffixHash[i][j].second)%mod[1] + mod[1])%mod[1];
+            for(int k = j-1; k >= 0; k--){
+                h.first = (h.first * p[0] + S[i][k] - 'a' + 1) % mod[0];
+                h.second = (h.second * p[1] + S[i][k] - 'a' + 1) % mod[1];
+            }
 
             if(hashSet.find(h) != hashSet.end()){
                 ans = max(ans, sz + (j));
