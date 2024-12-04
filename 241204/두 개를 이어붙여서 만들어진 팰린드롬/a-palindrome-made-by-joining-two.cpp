@@ -35,6 +35,7 @@ int main()
     vector<ll> mod = {1000000007, 1000000009};
 
     set<pair<ll, ll>> hashSet, revHashSet;
+    int ans = 0;
 
     for (int i = 0; i < N; i++)
     {
@@ -56,10 +57,14 @@ int main()
         }
 
         hashSet.insert({h1, h2});
+
+        if(revHashSet.find({h1, h2}) != revHashSet.end()){
+            ans = max(ans, sz*2);
+        }
+
         revHashSet.insert({sh1, sh2});
     }
     
-    int ans = 0;
 
     for(int i = 0; i < N; i++)
     {
@@ -119,6 +124,12 @@ int main()
             if(hashSet.find(h) != hashSet.end()){
                 ans = max(ans, sz + (j));
             }
+        }
+
+        pair<ll, ll> h = {0, 0};
+        for(int j = 0; j < sz; j++){
+            h.first = (h.first * p[0] + S[i][j] - 'a' + 1) % mod[0];
+            h.second = (h.second * p[1] + S[i][j] - 'a' + 1) % mod[1];
         }
     }
 
