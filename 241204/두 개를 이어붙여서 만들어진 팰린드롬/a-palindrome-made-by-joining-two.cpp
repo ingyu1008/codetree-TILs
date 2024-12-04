@@ -31,8 +31,8 @@ int main()
         cin >> S[i];
     }
 
-    vector<vector<pair<ll, ll>>> prefixHash(N, vector<pair<ll, ll>>(N, {0, 0}));
-    vector<vector<pair<ll, ll>>> suffixHash(N, vector<pair<ll, ll>>(N, {0, 0}));
+    vector<vector<pair<ll, ll>>> prefixHash(N);
+    vector<vector<pair<ll, ll>>> suffixHash(N);
 
     vector<ll> p = {31, 37};
     vector<ll> mod = {1000000007, 1000000009};
@@ -42,6 +42,8 @@ int main()
     for (int i = 0; i < N; i++)
     {
         int sz = S[i].size();
+        prefixHash[i].resize(sz);
+        suffixHash[i].resize(sz);
 
         ll h1 = S[i][0] - 'a' + 1;
         ll h2 = S[i][0] - 'a' + 1;
