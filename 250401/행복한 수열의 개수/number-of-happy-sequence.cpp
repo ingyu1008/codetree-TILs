@@ -12,18 +12,27 @@ int main() {
     int ans = 0;
 
     for(int i = 0; i < N; i++){
-        unordered_map<int, int> row, col;
+        int r = -1, c = -1;
+        int row = 0, col = 0;
         for(int j = 0; j < N; j++){
-            row[v[i][j]]++;
-            if(row[v[i][j]] == M){
+            if(r == v[i][j]) row++;
+            else {
+                r = v[i][j];
+                row = 1;
+            }
+            if(row == M){
                 ans++;
                 break;
             }
         }
 
         for(int j = 0; j < N; j++){
-            col[v[j][j]]++;
-            if(col[v[i][j]] == M){
+            if(c == v[j][i]) col++;
+            else {
+                c = v[j][i];
+                col = 1;
+            }
+            if(col == M){
                 ans++;
                 break;
             }
