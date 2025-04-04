@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
     int ans = 0;
 
-    for (int k = 0; k < N; k++)
+    for (int k = 0; k < 2*N; k++)
     {
         for (int i = 0; i < N; i++)
         {
