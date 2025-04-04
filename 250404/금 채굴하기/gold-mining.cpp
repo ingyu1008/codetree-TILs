@@ -36,7 +36,7 @@ int main(int argc, char **argv)
                     }
                 }
 
-                if (sum * M > k*k + (k+1)*(k+1))
+                if (sum * M >= k*k + (k+1)*(k+1))
                 {
                     ans = max(ans, sum);
                 }
