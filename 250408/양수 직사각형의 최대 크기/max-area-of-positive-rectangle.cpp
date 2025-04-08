@@ -38,7 +38,7 @@ int main(int argc, char **argv)
                     {
                         for (int j = c; j < c + csz; j++)
                         {
-                            if (grid[i][j] < 0)
+                            if (grid[i][j] <= 0)
                             {
                                 contains_negative = true;
                                 break;
