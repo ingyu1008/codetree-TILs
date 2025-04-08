@@ -20,7 +20,7 @@ int main(int argc, char **argv)
         }
     }
 
-    int ans = 0;
+    int ans = -1;
 
     for(int r = 0; r < N; r++)
     {
