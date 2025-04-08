@@ -20,7 +20,7 @@ int main(int argc, char **argv)
     }
 
     int max_regions = 0;
-    int k = 0;
+    int k = 1;
 
     vector<int> dr = {0, 1, 0, -1};
     vector<int> dc = {1, 0, -1, 0};
