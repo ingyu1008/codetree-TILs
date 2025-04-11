@@ -20,6 +20,7 @@ int main() {
     for(int i = 0; i < K; i++){
         int r, c;
         cin >> r >> c;
+        visited[r-1][c-1] = true;
         q.push({r-1, c-1});
     }
 
