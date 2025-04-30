@@ -16,8 +16,10 @@ int main(int argc, char **argv)
     dp[1] = 2;
     dp[2] = 7;
 
+    ll mod = 1e9+7;
+
     for(int i = 3; i <= N; i++){
-        dp[i] = (dp[i-2]*4 + dp[i-1]*2) % (1e9+7);
+        dp[i] = (dp[i-2]*4 + dp[i-1]*2) % mod;
     }
 
     cout << dp[N] << "\n";
