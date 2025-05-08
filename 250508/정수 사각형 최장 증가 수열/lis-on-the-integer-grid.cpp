@@ -22,16 +22,16 @@ int main(int argc, char **argv)
     vector<int> dr = {0, 1, 0, -1};
     vector<int> dc = {1, 0, -1, 0};
 
-    queue<array<int, 3>> pq;
+    priority_queue<array<int, 4>, vector<array<int, 4>>, greater<array<int, 4>>> pq;
     for(int i = 0; i < N; i++){
         for (int j = 0; j < N; j++){
-            pq.push({1, i, j});
+            pq.push({grid[i][j], 1, i, j});
             dp[i][j] = 1;
         }
     }
 
     while(!pq.empty()){
-        auto [cur, r, c] = pq.front();
+        auto [_, cur, r, c] = pq.top();
         pq.pop();
 
         if (dp[r][c] > cur){
@@ -49,7 +49,7 @@ int main(int argc, char **argv)
             if (grid[nr][nc] > grid[r][c]){
                 if(dp[nr][nc] < cur + 1){
                     dp[nr][nc] = cur + 1;
-                    pq.push({dp[nr][nc], nr, nc});
+                    pq.push({grid[nr][nc], dp[nr][nc], nr, nc});
                 }
             }
         }
