@@ -22,7 +22,7 @@ int main(int argc, char **argv)
     vector<int> dr = {0, 1, 0, -1};
     vector<int> dc = {1, 0, -1, 0};
 
-    priority_queue<array<int, 3>> pq;
+    queue<array<int, 3>> pq;
     for(int i = 0; i < N; i++){
         for (int j = 0; j < N; j++){
             pq.push({1, i, j});
@@ -31,7 +31,7 @@ int main(int argc, char **argv)
     }
 
     while(!pq.empty()){
-        auto [cur, r, c] = pq.top();
+        auto [cur, r, c] = pq.front();
         pq.pop();
 
         if (dp[r][c] > cur){
