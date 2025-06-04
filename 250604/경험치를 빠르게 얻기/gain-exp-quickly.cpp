@@ -18,7 +18,7 @@ int main(int argc, char **argv)
     vector<vector<ll>> dp(N + 1, vector<ll>(10101, 0));
     for (int i = 1; i <= N; i++)
     {
-        for (int j = 0; j <= 10101; j++)
+        for (int j = 0; j < 10101; j++)
         {
             dp[i][j] = dp[i - 1][j]; // Not taking the i-th item
             if (j >= weight[i - 1])
