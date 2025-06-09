@@ -21,9 +21,9 @@ int main(int argc, char **argv)
     int ans = 0;
 
     for(int r1 = 0; r1 < N; r1++){
-        for(int c1 = 0; c1 < N-M; c1++){
+        for(int c1 = 0; c1 <= N-M; c1++){
             for(int r2 = 0; r2 < N; r2++){
-                for(int c2 = 0; c2 < N-M; c2++){
+                for(int c2 = 0; c2 <= N-M; c2++){
                     // check overlap
                     if(r1 == r2 && (c1 <= c2 && c1 + M - 1 >= c2  || c1 >= c2 && c2 + M - 1 >= c1)) continue;
                     
