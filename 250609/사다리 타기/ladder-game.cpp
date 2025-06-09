@@ -24,10 +24,10 @@ int main(int argc, char **argv)
     iota(original.begin(), original.end(), 0); // Fill with 0, 1, ..., N-1
 
     for(int i = 0; i < M; ++i) {
-        swap(original[edges[i].first], original[edges[i].second]);
+        swap(original[edges[i].second], original[edges[i].second + 1]);
     }
 
-    int ans = 0;
+    int ans = M;
 
     for(int i = 0; i < (1 << M); i++){
         vector<int> result(N);
@@ -35,7 +35,7 @@ int main(int argc, char **argv)
 
         for(int j = 0; j < M; j++){
             if(i & (1 << j)) {
-                swap(result[edges[j].first], result[edges[j].second]);
+                swap(result[edges[j].second], result[edges[j].second + 1]);
             }
         }
 
@@ -48,11 +48,11 @@ int main(int argc, char **argv)
         }
 
         if(isValid) {
-            ans = max(ans, __builtin_popcount(i));
+            ans = min(ans, __builtin_popcount(i));
         }
     }
 
-    cout << M-ans << endl;
+    cout << ans << endl;
 
     return 0;
 }
