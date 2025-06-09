@@ -27,7 +27,7 @@ int main(int argc, char **argv)
         swap(original[edges[i].first], original[edges[i].second]);
     }
 
-    int ans = M;
+    int ans = 0;
 
     for(int i = 0; i < (1 << M); i++){
         vector<int> result(N);
@@ -48,7 +48,7 @@ int main(int argc, char **argv)
         }
 
         if(isValid) {
-            ans = min(ans, __builtin_popcount(i));
+            ans = max(ans, __builtin_popcount(i));
         }
     }
 
