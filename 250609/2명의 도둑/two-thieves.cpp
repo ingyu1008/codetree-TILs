@@ -26,29 +26,38 @@ int main(int argc, char **argv)
                 for(int c2 = 0; c2 < N-M; c2++){
                     // check overlap
                     if(r1 == r2 && (c1 + M - 1 >= c2  || c2 + M - 1 >= c1)) continue;
-                    int tot = 0;
-                    // select optimal
-                    vector<int> v1, v2;
-                    for(int i = 0; i < M; i++){
-                        v1.push_back(grid[r1][c1 + i]);
-                        v2.push_back(grid[r2][c2 + i]);
-                    }
-                    sort(v1.rbegin(), v1.rend());
-                    sort(v2.rbegin(), v2.rend());
-
+                    
                     int sum1 = 0, sum2 = 0;
-                    for(int i = 0; i < M; i++){
-                        if(sum1 + v1[i] <= C){
-                            sum1 += v1[i];
-                            tot += v1[i]*v1[i];
+                    // select optimal
+                    for(int i = 0; i < (1 << M); i++){
+                        int cap = 0;
+                        int val = 0;
+                        for(int j = 0; j < M; j++){
+                            if(i & (1 << j)){
+                                cap += grid[r1][c1 + j];
+                                val += grid[r1][c1 + j]*grid[r1][c1 + j];
+                            }
                         }
-                        if(sum2 + v2[i] <= C){
-                            sum2 += v2[i];
-                            tot += v2[i]*v2[i];
+                        if(cap <= C) {
+                            sum1 = max(sum1, val);
                         }
                     }
 
-                    ans = max(ans, tot);
+                    for(int i = 0; i < (1 << M); i++){
+                        int cap = 0;
+                        int val = 0;
+                        for(int j = 0; j < M; j++){
+                            if(i & (1 << j)){
+                                cap += grid[r2][c2 + j];
+                                val += grid[r2][c2 + j]*grid[r2][c2 + j];
+                            }
+                        }
+                        if(cap <= C) {
+                            sum2 = max(sum2, val);
+                        }
+                    }
+
+                    ans = max(ans, sum1 + sum2);
                 }
             }
         }
