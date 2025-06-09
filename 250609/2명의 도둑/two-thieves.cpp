@@ -25,7 +25,7 @@ int main(int argc, char **argv)
             for(int r2 = 0; r2 < N; r2++){
                 for(int c2 = 0; c2 < N-M; c2++){
                     // check overlap
-                    if(r1 == r2 && (c1 < c2 && c1 + M - 1 >= c2  || c1 > c2 && c2 + M - 1 >= c1)) continue;
+                    if(r1 == r2 && (c1 <= c2 && c1 + M - 1 >= c2  || c1 >= c2 && c2 + M - 1 >= c1)) continue;
                     
                     int sum1 = 0, sum2 = 0;
                     // select optimal
