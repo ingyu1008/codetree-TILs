@@ -34,11 +34,10 @@ int main(int argc, char **argv)
                 int st2 = lines[y].first;
                 int en2 = lines[y].second;
 
-                if((st1 >= st2 && en1 <= en2) || (st2 >= st1 && en2 <= en1) ||
-                   (st1 <= st2 && en1 >= en2) || (st2 <= st1 && en2 >= en1)) {
-                    intersect = true;
-                    break;
-                }
+                if((en1 < st2) || (en2 < st1)) continue;
+
+                intersect = true;
+                break;
             }
         }
 
